@@ -1,0 +1,48 @@
+# Dependências
+node_modules/
+# Build / saída compilada
+dist/
+build/
+out/
+
+# Arquivos TypeScript
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ambiente
+.env
+.env.*.local
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testes / cobertura
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.eslintcache
+
+# Arquivos temporários
+tmp/
+temp/
+
+# Lock opcional (se você NÃO quiser versionar)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
