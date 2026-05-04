@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto — Loja Virtual</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>➕ Cadastrar Novo Produto</h1>
+        <p>Preencha os dados e clique em Cadastrar</p>
+    </header>
+    <main>
+        <section style="max-width:600px; margin:0 auto;">
+
+            <% if (erro === "dados-invalidos") { %>
+                <div class="alerta-erro">❌ Dados inválidos! Verifique os campos e tente novamente.</div>
+            <% } else if (erro === "servidor") { %>
+                <div class="alerta-erro">❌ Erro no servidor. Tente novamente.</div>
+            <% } %>
+
+            <form method="POST" action="/produtos/cadastrar">
+
+                <div class="form-group">
+                    <label for="nome">Nome do produto *</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: Camiseta Polo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="preco">Preço (R$) *</label>
+                    <input type="number" id="preco" name="preco" step="0.01" min="0.01" placeholder="Ex: 49.90" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estoque">Estoque (quantidade) *</label>
+                    <input type="number" id="estoque" name="estoque" min="0" placeholder="Ex: 25" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria">
+                        <% categorias.forEach((cat) => { %>
+                            <option value="<%= cat %>"><%= cat %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <button type="submit" class="btn btn-primary">💾 Cadastrar</button>
+                    <a href="/pagina/produtos" class="btn btn-secondary">Cancelar</a>
+                </div>
+
+            </form>
+        </section>
+    </main>
+    <footer><p>SENAC/RN — Técnico em Informática para Internet | Prof. Alex Almeida | 2026</p></footer>
+</body>
+</html>

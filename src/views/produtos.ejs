@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos — Loja Virtual</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>📦 Catálogo de Produtos</h1>
+        <p>Dados persistidos em JSON — sobrevivem ao reinício do servidor!</p>
+    </header>
+    <main>
+        <section>
+            <%# Alertas de sucesso/erro via query string (Aula 12) %>
+            <% if (mensagem === "cadastrado") { %>
+                <div class="alerta-sucesso">✅ Produto cadastrado com sucesso!</div>
+            <% } else if (mensagem === "removido") { %>
+                <div class="alerta-sucesso">🗑️ Produto removido com sucesso!</div>
+            <% } %>
+            <% if (erro) { %>
+                <div class="alerta-erro">❌ Ocorreu um erro: <%= erro %></div>
+            <% } %>
+
+            <h3>Produtos cadastrados: <span style="color:#F28C28"><%= total %></span></h3>
+
+            <%# Filtros por categoria %>
+            <div class="filtros">
+                <a href="/pagina/produtos" class="<%= !categoriaFiltro ? 'ativo' : '' %>">Todos</a>
+                <a href="/pagina/produtos?categoria=Eletrônico" class="<%= categoriaFiltro === 'Eletrônico' ? 'ativo' : '' %>">Eletrônico</a>
+                <a href="/pagina/produtos?categoria=Roupa" class="<%= categoriaFiltro === 'Roupa' ? 'ativo' : '' %>">Roupa</a>
+                <a href="/pagina/produtos?categoria=Alimento" class="<%= categoriaFiltro === 'Alimento' ? 'ativo' : '' %>">Alimento</a>
+                <a href="/pagina/produtos?categoria=Outro" class="<%= categoriaFiltro === 'Outro' ? 'ativo' : '' %>">Outro</a>
+            </div>
+
+            <%# Lista vazia (Aula 11) %>
+            <% if (produtos.length === 0) { %>
+                <div class="vazio">
+                    <p>😢 Nenhum produto cadastrado ainda.</p>
+                    <a href="/pagina/cadastrar" class="btn btn-primary">➕ Cadastrar primeiro produto</a>
+                </div>
+            <% } else { %>
+
+                <%# Tabela com forEach (Aula 11) %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Categoria</th>
+                            <th>Estoque</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% produtos.forEach((p) => { %>
+                            <tr>
+                                <td><%= p.id %></td>
+                                <td><strong><%= p.nome %></strong></td>
+                                <td><span class="preco">R$ <%= p.preco.toFixed(2) %></span></td>
+                                <td><span class="categoria-badge"><%= p.categoria %></span></td>
+                                <td><span class="estoque"><%= p.estoque %> un.</span></td>
+                                <td>
+                                    <% if (p.disponivel) { %>
+                                        <span class="disponivel">✅ Disponível</span>
+                                    <% } else { %>
+                                        <span class="esgotado">❌ Esgotado</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <a href="/pagina/produtos/<%= p.id %>">Detalhes</a>
+                                    &nbsp;|&nbsp;
+                                    <form class="inline" method="POST" action="/produtos/<%= p.id %>/excluir"
+                                          onsubmit="return confirm('Tem certeza que deseja excluir?')">
+                                        <button type="submit" class="btn-danger">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } %>
+
+            <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="/pagina/cadastrar" class="btn btn-primary">➕ Novo Produto</a>
+                <a href="/" class="link-voltar">← Página inicial</a>
+            </div>
+        </section>
+
+        <%# Estatísticas (Aula 11 — cálculos passados do controller) %>
+        <section>
+            <h3>📊 Estatísticas</h3>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="numero" style="color:#E8621A"><%= total %></div>
+                    <div class="label">Total de produtos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="numero" style="color:#27AE60"><%= disponiveis %></div>
+                    <div class="label">Disponíveis</div>
+                </div>
+                <div class="stat-card">
+                    <div class="numero" style="color:#E74C3C"><%= esgotados %></div>
+                    <div class="label">Esgotados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="numero" style="color:#F1C40F">R$ <%= valorTotal.toFixed(2) %></div>
+                    <div class="label">Valor total em estoque</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer><p>SENAC/RN — Técnico em Informática para Internet | Prof. Alex Almeida | 2026</p></footer>
+</body>
+</html>

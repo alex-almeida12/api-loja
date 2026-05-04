@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= produto.nome %> — Loja Virtual</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>🏷️ Detalhe do Produto</h1>
+        <p>Informações completas do produto</p>
+    </header>
+    <main>
+        <section class="detalhe-card">
+            <h2><%= produto.nome %></h2>
+            <div class="detalhe-info">
+                <p><strong>ID:</strong> <%= produto.id %></p>
+                <p><strong>Nome:</strong> <%= produto.nome %></p>
+                <p><strong>Preço:</strong> <span class="preco">R$ <%= produto.preco.toFixed(2) %></span></p>
+                <p><strong>Categoria:</strong> <span class="categoria-badge"><%= produto.categoria %></span></p>
+                <p><strong>Estoque:</strong> <span class="estoque"><%= produto.estoque %> unidades</span></p>
+                <p><strong>Status:</strong>
+                    <% if (produto.disponivel) { %>
+                        <span class="disponivel">✅ Disponível para venda</span>
+                    <% } else { %>
+                        <span class="esgotado">❌ Produto esgotado</span>
+                    <% } %>
+                </p>
+
+                <% if (produto.estoque > 20) { %>
+                    <p style="margin-top:20px; color:#27AE60;">📦 Estoque alto — produto bem abastecido!</p>
+                <% } else if (produto.estoque > 0) { %>
+                    <p style="margin-top:20px; color:#F1C40F;">⚠️ Estoque baixo — considere reabastecer.</p>
+                <% } else { %>
+                    <p style="margin-top:20px; color:#E74C3C;">🚫 Sem estoque — produto indisponível para venda.</p>
+                <% } %>
+            </div>
+            <a href="/pagina/produtos" class="link-voltar">← Voltar para o catálogo</a>
+        </section>
+    </main>
+    <footer><p>SENAC/RN — Técnico em Informática para Internet | Prof. Alex Almeida | 2026</p></footer>
+</body>
+</html>

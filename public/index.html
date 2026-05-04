@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 Loja Virtual — SENAC/RN</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>🛒 Loja Virtual</h1>
+        <p>UC31 — Prática Integradora — Aulas 01 a 14</p>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Bem-vindo à Loja Virtual!</h2>
+            <p>Esta aplicação integra <strong>tudo</strong> que aprendemos: TypeScript, Express, CRUD, Middleware, EJS, Formulários, Validação, Persistência em JSON e async/await.</p>
+            <div class="botoes">
+                <a href="/pagina/produtos" class="btn btn-primary">📦 Ver Catálogo</a>
+                <a href="/pagina/cadastrar" class="btn btn-secondary">➕ Cadastrar Produto</a>
+                <a href="/produtos" class="btn btn-secondary">📡 Ver API JSON</a>
+            </div>
+        </section>
+        <section class="info">
+            <h3>Endpoints da API (JSON)</h3>
+            <table>
+                <thead><tr><th>Método</th><th>Rota</th><th>Descrição</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="metodo get">GET</span></td><td>/produtos</td><td>Listar todos</td></tr>
+                    <tr><td><span class="metodo get">GET</span></td><td>/produtos?categoria=Roupa</td><td>Filtrar por categoria</td></tr>
+                    <tr><td><span class="metodo get">GET</span></td><td>/produtos?disponivel=true</td><td>Filtrar disponíveis</td></tr>
+                    <tr><td><span class="metodo get">GET</span></td><td>/produtos/:id</td><td>Buscar por ID</td></tr>
+                    <tr><td><span class="metodo post">POST</span></td><td>/produtos</td><td>Criar novo (JSON)</td></tr>
+                    <tr><td><span class="metodo put">PUT</span></td><td>/produtos/:id</td><td>Atualizar</td></tr>
+                    <tr><td><span class="metodo delete">DELETE</span></td><td>/produtos/:id</td><td>Remover</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer><p>SENAC/RN — Técnico em Informática para Internet | Prof. Alex Almeida | 2026</p></footer>
+</body>
+</html>
